@@ -1,0 +1,6 @@
+---
+
+- name: Install libvirt
+  hosts: all
+  roles:
+    - libvirt
