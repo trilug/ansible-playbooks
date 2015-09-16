@@ -1,0 +1,6 @@
+---
+
+- name: Install haproxy
+  hosts: all
+  roles:
+    - haproxy

@@ -1,0 +1,18 @@
+---
+
+- name: Install haproxy
+  apt: name=haproxy state=latest
+
+- name: Ensure service is running at boot
+  service: name=haproxy state=running enabled=true
+
+- name: Place haproxy file
+  template: src=haproxy.cfg dest=/etc/haproxy/haproxy.cfg
+  register: haproxy
+
+- name: Gen self signed cert, if no certs exist at all
+  script: self_signed.sh creates=/etc/ssl/private/server.pem
+
+- name: Restart haproxy if config changed
+  service: name=haproxy state=restarted
+  when: haproxy.changed
