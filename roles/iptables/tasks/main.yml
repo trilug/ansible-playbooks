@@ -1,0 +1,12 @@
+---
+
+- name: Install iptables
+  apt: name=iptables-persistent state=latest
+
+- name: Copy over iptables file
+  template: src=rules.v4 dest=/etc/iptables/rules.v4
+  register: iptables
+
+- name: Restore iptables rules
+  shell: iptables-restore /etc/iptables/rules.v4
+  when: iptables.changed
