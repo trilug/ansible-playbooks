@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 tmpcerts=$(mktemp -d)
 trap "rm -rf $tmpcerts" EXIT
