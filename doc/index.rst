@@ -6,11 +6,17 @@
 Welcome to TriLUG Systems's documentation!
 ==========================================
 
+This is the documentation for the infrastructure that powers the
+Triangle Linux Users Group's infrastructure. It will cover the
+philosophy behind why we are maintaining the infrastructure and how we
+are doing it.
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   machines
 
 
 Indices and tables
