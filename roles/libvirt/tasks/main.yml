@@ -13,3 +13,17 @@
   with_items:
     - /var/lib/libvirt/isos
     - /var/lib/libvirt/configs
+    - /var/cache/ansible/libvirt
+
+- name: Copy libvirt config files
+  copy: src={{ item }} dest=/var/cache/ansible/libvirt
+  with_items:
+    - pilot.xml
+    - virt-net.xml
+
+- name: Load net config file
+  command: virsh net-define /var/cache/ansible/libvirt/virt-net.xml 
+        
+- name: Load pilot config file
+  command: virsh define /var/cache/ansible/libvirt/pilot.xml 
+        
