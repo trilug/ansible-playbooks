@@ -24,6 +24,12 @@
 - name: Load net config file
   command: virsh net-define /var/cache/ansible/libvirt/virt-net.xml 
         
+- name: Destroy libvirt network
+  command: virsh net-destroy default
+        
+- name: Start libvirt network
+  command: virsh net-start default
+        
 - name: Load pilot config file
   command: virsh define /var/cache/ansible/libvirt/pilot.xml 
         
