@@ -9,8 +9,8 @@
   <bridge name='virbr0' stp='on' delay='0'/>
   <ip address='192.168.122.1' netmask='255.255.255.0'>
     <dhcp>
-      <range start='192.168.122.2' end='192.168.122.254'/>
-      <host mac='52:54:00:f7:1c:5f' name='pilot.trilug.org' ip='192.168.122.78'/>
+      <range start='192.168.122.32' end='192.168.122.254'/>
+      <host mac='52:54:00:f7:1c:5f' name='pilot.trilug.org' ip='192.168.122.3'/>
     </dhcp>
   </ip>
 </network>
