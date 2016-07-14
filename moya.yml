@@ -1,0 +1,8 @@
+---
+- name: Setup moya
+  hosts: all
+  roles:
+    - iptables
+    - ntpclient
+    - haproxy
+    - libvirt

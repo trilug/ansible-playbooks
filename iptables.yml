@@ -1,6 +1,0 @@
----
-
-- name: Install Iptables
-  hosts: all
-  roles:
-    - iptables

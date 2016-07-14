@@ -1,5 +1,0 @@
----
-- name: Install ntp
-  hosts: all
-  roles:
-    - ntpclient
