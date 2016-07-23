@@ -19,17 +19,24 @@
   copy: src={{ item }} dest=/var/cache/ansible/libvirt
   with_items:
     - pilot.xml
-    - virt-net.xml
 
-- name: Load net config file
-  command: virsh net-define /var/cache/ansible/libvirt/virt-net.xml 
-        
+- name: Define static IP for pilot
+  command: virsh net-update --network default --command add-last --section ip-dhcp-host --xml "<host mac='52:54:00:f7:1c:5f' name='pilot.trilug.org' ip='192.168.122.3'/>"
+  register: net_define
+  changed_when: net_define.rc == 0
+  failed_when: >
+    net_define.rc != 0 and ("there is an existing" not in net_define.stderr)
+
 - name: Destroy libvirt network
   command: virsh net-destroy default
-        
+  register: net_destroy
+  when: net_define|succeeded
+  failed_when: >
+    net_destroy.rc != 0 and ("is not active" not in net_destroy.stderr)
+
 - name: Start libvirt network
   command: virsh net-start default
-        
+  when: net_define|succeeded
+
 - name: Load pilot config file
   command: virsh define /var/cache/ansible/libvirt/pilot.xml 
-        
