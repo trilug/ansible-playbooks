@@ -1,7 +1,10 @@
 ---
 
-- name: Install haproxy
-  apt: name=haproxy state=latest
+- name: Install packages
+  apt: name={{item}} state=latest
+  with_items:
+    - haproxy
+    - openssl
 
 - name: Ensure service is running at boot
   service: name=haproxy state=running enabled=true
