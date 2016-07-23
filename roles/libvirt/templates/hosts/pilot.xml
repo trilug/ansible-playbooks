@@ -80,7 +80,7 @@
       <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
     </controller>
     <interface type='network'>
-      <mac address='52:54:00:f7:1c:5f'/>
+      <mac address='{{moya.vm_net.pilot.mac}}'/>
       <source network='default'/>
       <target dev='vnet0'/>
       <model type='rtl8139'/>

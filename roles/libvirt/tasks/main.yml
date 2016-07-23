@@ -16,12 +16,12 @@
     - /var/cache/ansible/libvirt
 
 - name: Copy libvirt config files
-  copy: src={{ item }} dest=/var/cache/ansible/libvirt
+  template: src=hosts/{{item}} dest=/var/cache/ansible/libvirt
   with_items:
     - pilot.xml
 
 - name: Define static IP for pilot
-  command: virsh net-update --network default --command add-last --section ip-dhcp-host --xml "<host mac='52:54:00:f7:1c:5f' name='pilot.trilug.org' ip='192.168.122.3'/>"
+  command: virsh net-update --network default --command add-last --section ip-dhcp-host --xml "<host mac='{{moya.vm_net.pilot.mac}}' name='pilot.trilug.org' ip='{{moya.vm_net.pilot.ipv4}}'/>"
   register: net_define
   changed_when: net_define.rc == 0
   failed_when: >
