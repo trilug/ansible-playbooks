@@ -2,6 +2,7 @@
 - name: Setup moya
   hosts: all
   roles:
+    - ident
     - iptables
     - ntpclient
     - haproxy
