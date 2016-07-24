@@ -5,6 +5,8 @@ moya:
     pilot:
       mac: 52:54:00:f7:1c:5f
       ipv4: 192.168.122.3
+      udp_forwards:
+        - 53 # dns
       tcp_forwards:
         - 22 # ssh
         - 53 # dns
