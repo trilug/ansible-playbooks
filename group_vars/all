@@ -5,5 +5,13 @@ moya:
     pilot:
       mac: 52:54:00:f7:1c:5f
       ipv4: 192.168.122.3
+      tcp_forwards:
+        - 22 # ssh
+        - 53 # dns
+        - 143 # imap
+        - 993 # imaps
+        - 25 # smtp
+        - 465 # smtps
+        - 587 # mail submission
 
 # vim: filetype=yaml

@@ -13,7 +13,9 @@ COMMIT
 :INPUT ACCEPT [4:271]
 :OUTPUT ACCEPT [5:576]
 :POSTROUTING ACCEPT [5:576]
--A PREROUTING -i eth0 -p tcp --dport 22 -j DNAT --to-destination {{ moya.vm_net.pilot.ipv4 }}
+{% for port in moya.vm_net.pilot.tcp_forwards %}
+-A PREROUTING -i eth0 -p tcp --dport {{port}} -j DNAT --to-destination {{ moya.vm_net.pilot.ipv4 }}
+{% endfor %}
 -A POSTROUTING -s {{ moya.vm_net.cidr }} -d 224.0.0.0/24 -j RETURN
 -A POSTROUTING -s {{ moya.vm_net.cidr }} -d 255.255.255.255/32 -j RETURN
 -A POSTROUTING -s {{ moya.vm_net.cidr }} ! -d {{ moya.vm_net.cidr }} -p tcp -j MASQUERADE --to-ports 1024-65535
@@ -31,7 +33,9 @@ COMMIT
 -A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT
 -A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT
 -A FORWARD -d {{ moya.vm_net.cidr }} -o virbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -d {{ moya.vm_net.cidr }} -o virbr0 -p tcp --dport 22 -j ACCEPT
+{% for port in moya.vm_net.pilot.tcp_forwards %}
+-A FORWARD -d {{ moya.vm_net.cidr }} -o virbr0 -p tcp --dport {{port}} -j ACCEPT
+{% endfor %}
 -A FORWARD -s {{ moya.vm_net.cidr }} -i virbr0 -j ACCEPT
 -A FORWARD -i virbr0 -o virbr0 -j ACCEPT
 -A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable
