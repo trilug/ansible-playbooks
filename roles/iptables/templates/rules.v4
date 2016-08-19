@@ -40,6 +40,7 @@ COMMIT
 -A FORWARD -d {{ moya.vm_net.cidr }} -o virbr0 -p udp --dport {{port}} -j ACCEPT
 {% endfor %}
 {% for port in moya.vm_net.pilot.tcp_forwards %}
+-A INPUT -i virbr0 -p tcp --dport {{port}} -j ACCEPT
 -A FORWARD -d {{ moya.vm_net.cidr }} -o virbr0 -p tcp --dport {{port}} -j ACCEPT
 {% endfor %}
 -A FORWARD -s {{ moya.vm_net.cidr }} -i virbr0 -j ACCEPT
