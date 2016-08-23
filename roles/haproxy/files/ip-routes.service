@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup IP routes for transparent haproxy
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/ip rule add fwmark 1 lookup 100
+ExecStart=/bin/ip route add local 0.0.0.0/0 dev lo table 100
+
+[Install]
+WantedBy=haproxy.service

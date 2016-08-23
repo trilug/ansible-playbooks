@@ -6,6 +6,22 @@
     - haproxy
     - openssl
 
+- name: Allow binding to non-local addresses for transparent proxying
+  sysctl:
+    name: net.ipv4.ip_nonlocal_bind
+    value: 1
+
+- name: Setup IP route rules for transparent proxying
+  register: service
+  notify: [ip-routes]
+  copy:
+    src: ip-routes.service
+    dest: /etc/systemd/system
+
+- name: Enable IP route rules
+  when: service|changed
+  command: systemctl daemon-reload
+
 - name: Place haproxy file
   template: src=haproxy.cfg dest=/etc/haproxy/haproxy.cfg
   register: haproxy
