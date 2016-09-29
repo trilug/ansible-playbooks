@@ -1,0 +1,11 @@
+---
+- name: Create interface config file
+  register: config
+  template:
+    src: br-guest.conf
+    dest: /etc/network/interfaces.d
+
+- name: Enable interface
+  when: config|changed
+  shell: ifdown br-guest; ifup br-guest
+
