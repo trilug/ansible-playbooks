@@ -20,23 +20,25 @@
   with_items:
     - pilot.xml
 
-- name: Define static IP for pilot
-  command: virsh net-update --network default --command add-last --section ip-dhcp-host --xml "<host mac='{{moya.vm_net.pilot.mac}}' name='pilot.trilug.org' ip='{{moya.vm_net.pilot.ipv4}}'/>"
-  register: net_define
-  changed_when: net_define.rc == 0
-  failed_when: >
-    net_define.rc != 0 and ("there is an existing" not in net_define.stderr)
+- name: Setup DHCP configurations
+  register: dnsmasq
+  template:
+    src: dhcp/{{item}}
+    dest: /var/lib/dhcp/hosts
+  with_items:
+    - pilot
 
-- name: Destroy libvirt network
-  command: virsh net-destroy default
+- name: Reload dnsmasq config
+  when: dnsmasq|changed
+  shell: kill -HUP $(cat /var/run/dnsmasq/dnsmasq.pid) || true
+
+- name: Destroy libvirt default network
+  command: virsh net-undefine default
   register: net_destroy
-  when: net_define|succeeded
   failed_when: >
-    net_destroy.rc != 0 and ("is not active" not in net_destroy.stderr)
-
-- name: Start libvirt network
-  command: virsh net-start default
-  when: net_define|succeeded
+    net_destroy.rc != 0 and ("Network not found" not in net_destroy.stderr)
+  changed_when: >
+    net_destroy.rc == 0
 
 - name: Load pilot config file
   command: virsh define /var/cache/ansible/libvirt/pilot.xml 

@@ -79,9 +79,9 @@
       <alias name='virtio-serial0'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
     </controller>
-    <interface type='network'>
+    <interface type='bridge'>
       <mac address='{{moya.vm_net.pilot.mac}}'/>
-      <source network='default'/>
+	  <source bridge='br-guest' />
       <target dev='vnet0'/>
       <model type='rtl8139'/>
       <alias name='net0'/>

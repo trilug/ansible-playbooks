@@ -1,6 +1,7 @@
 ---
 moya:
   vm_net:
+    device: br-guest
     cidr: 192.168.122.0/24
     pilot:
       mac: 52:54:00:f7:1c:5f
