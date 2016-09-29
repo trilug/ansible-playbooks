@@ -9,3 +9,16 @@
   when: config|changed
   shell: ifdown br-guest; ifup br-guest
 
+- name: Create DHCP hosts directory
+  file:
+    path: /var/lib/dhcp/hosts
+    state: directory
+
+- name: Create dnsmasq config file
+  template:
+    src: dnsmasq.conf
+    dest: /etc
+
+- name: Install dnsmasq
+  apt:
+    name: dnsmasq
