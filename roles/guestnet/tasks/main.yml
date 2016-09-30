@@ -9,6 +9,15 @@
   when: config|changed
   shell: ifdown br-guest; ifup br-guest
 
+- name: Add sysctl file to enable IPv4 forwarding
+  register: sysctl
+  template:
+    src: ip-forward.conf
+    dest: /etc/sysctl.d
+- name: Enable IPv4 forwarding
+  when: sysctl|changed
+  command: sysctl -p
+
 - name: Create DHCP hosts directory
   file:
     path: /var/lib/dhcp/hosts
