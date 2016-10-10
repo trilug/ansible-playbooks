@@ -1,0 +1,10 @@
+---
+- name: Create interface config file
+  register: config
+  template:
+    src: he-ipv6.conf
+    dest: /etc/network/interfaces.d
+
+- name: Enable interface
+  when: config|changed
+  shell: ifdown {{moya.internet.ipv6.device}}; ifup {{moya.internet.ipv6.device}}

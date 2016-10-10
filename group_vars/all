@@ -1,5 +1,12 @@
 ---
 moya:
+  internet:
+    ipv4:
+      address: 96.10.251.40
+    ipv6:
+      device: he-ipv6
+      address: 2001:470:7:9f8::2
+      gateway: 2001:470:7:9f8::1
   vm_net:
     device: br-guest
     cidr: 192.168.122.0/24
