@@ -9,12 +9,12 @@
   when: config|changed
   shell: ifdown br-guest; ifup br-guest
 
-- name: Add sysctl file to enable IPv4 forwarding
+- name: Add sysctl file to enable IP forwarding
   register: sysctl
   template:
     src: ip-forward.conf
     dest: /etc/sysctl.d
-- name: Enable IPv4 forwarding
+- name: Enable IP forwarding
   when: sysctl|changed
   command: sysctl -p
 
