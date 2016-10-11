@@ -24,6 +24,7 @@
     state: directory
 
 - name: Create dnsmasq config file
+  notify: [dnsmasq]
   template:
     src: dnsmasq.conf
     dest: /etc

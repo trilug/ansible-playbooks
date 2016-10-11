@@ -10,9 +10,11 @@ moya:
   vm_net:
     device: br-guest
     cidr: 192.168.122.0/24
+    ipv6: "2001:470:8:9f9::"
     pilot:
       mac: 52:54:00:f7:1c:5f
       ipv4: 192.168.122.3
+      ipv6_suffix: 2
       udp_forwards:
         - 53 # dns
       tcp_forwards:

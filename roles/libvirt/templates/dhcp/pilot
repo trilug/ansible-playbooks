@@ -1,1 +1,1 @@
-{{moya.vm_net.pilot.mac}},{{moya.vm_net.pilot.ipv4}},pilot.trilug.org
+{{moya.vm_net.pilot.mac}},{{moya.vm_net.pilot.ipv4}},[::{{moya.vm_net.pilot.ipv6_suffix}}],pilot
