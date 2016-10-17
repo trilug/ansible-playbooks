@@ -3,5 +3,5 @@
   hosts: all
   roles:
     - migrate
-      - ipv6
-      - guestnet
+    - ipv6
+    - guestnet
