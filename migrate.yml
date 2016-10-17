@@ -1,0 +1,7 @@
+---
+- name: migrate moya to final location
+  hosts: all
+  roles:
+    - migrate
+      - ipv6
+      - guestnet
