@@ -3,6 +3,8 @@ moya:
   internet:
     ipv4:
       address: 96.10.251.40
+      netmask: 255.255.255.240
+      gateway: 96.10.251.33
     ipv6:
       device: he-ipv6
       address: 2001:470:7:9f8::2
