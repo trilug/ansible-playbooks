@@ -2,17 +2,17 @@
 moya:
   internet:
     ipv4:
-      address: 96.10.251.40
-      netmask: 255.255.255.240
-      gateway: 96.10.251.33
+      address: 69.166.135.66
+      netmask: 255.255.255.248
+      gateway: 69.166.135.65
     ipv6:
       device: he-ipv6
-      address: 2001:470:7:9f8::2
-      gateway: 2001:470:7:9f8::1
+      address: 2001:470:7:11ec::2
+      gateway: 2001:470:7:11ec::1
   vm_net:
     device: br-guest
     cidr: 192.168.122.0/24
-    ipv6: "2001:470:8:9f9::"
+    ipv6: "2001:470:7:11ec::"
     pilot:
       mac: 52:54:00:f7:1c:5f
       ipv4: 192.168.122.3

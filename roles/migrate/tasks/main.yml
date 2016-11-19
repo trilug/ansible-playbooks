@@ -1,0 +1,5 @@
+---
+- name: Update config for eth0
+  template:
+    src: eth0.conf
+    dest: /etc/network/interfaces.d
