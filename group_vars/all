@@ -12,7 +12,7 @@ moya:
   vm_net:
     device: br-guest
     cidr: 192.168.122.0/24
-    ipv6: "2001:470:7:11ec::"
+    ipv6: "2001:470:8:11ec::"
     pilot:
       mac: 52:54:00:f7:1c:5f
       ipv4: 192.168.122.3
